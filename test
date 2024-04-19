@@ -1,1 +1,36 @@
-document.addEventListener('keyup', function(event) { var code = event.keyCode || event.which; if (code === 9) { document.getElementById("container-calendar---Main--calendar--Head-prev").style.background = "Transparent"; document.getElementById("container-calendar---Main--calendar--Head-next").style.background = "Transparent"; if(event.target.id === "container-calendar---Main--calendar--Head-prev" || event.target.id === "container-calendar---Main--calendar--Head-next") { document.getElementById(event.target.id).style.background = "red"; } } });
+updateFinished: function(oEvent) {
+                var aItems = oEvent.getSource().getItems();
+                var aVBox = aItems[aItems.length - 1].getContent()[0].getItems()[1].getItems();
+                for(var i = 0; i < aVBox.length; i++) {
+                    if(aVBox[i].getId().indexOf("DUMMY_BUTTON") !== -1) {
+                        document.getElementById(aVBox[i].getId()).tabIndex = "-1";
+                        return;
+                    }
+                }
+            },
+
+
+
+
+
+<List updateFinished="updateFinished" headerText="Custom Content" mode="Delete" items="{path: 'Customers>/'}" >
+                <CustomListItem >
+                    <HBox>
+                        <items>
+                            <VBox>
+                                <items> 
+                                    
+                                </items>
+                            </VBox>
+                            <VBox>
+                                    <HBox>
+                                        <Button text="Button 1" />
+                                    </HBox>
+                                    <!-- <List /> -->
+                                    <Button text="Button 2" id="DUMMY_BUTTON" />
+                                
+                            </VBox>
+                        </items>
+                    </HBox>    
+                </CustomListItem>
+            </List>
